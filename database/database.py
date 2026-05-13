@@ -8,11 +8,11 @@ def connect_database():
     return connection, cursor
 
 
-def write_new_user(values: tuple):
+def write_new_user(data: tuple):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT OR IGNORE INTO users (username,) VALUES (?,)""", values
+        """INSERT OR IGNORE INTO users (username,) VALUES (?,)""", data
     )
     conn.commit()
     conn.close()
@@ -33,20 +33,3 @@ def check_username(username):
     conn.close()
 
     return is_exist
-
-
-def check_password(username, password):
-    conn, cursor = connect_database()
-
-    cursor.execute("""SELECT password FROM users WHERE username = ?""", (username,))
-
-    result = cursor.fetchone()
-
-    if result[0] == password:
-        is_password_correct = True
-    else:
-        is_password_correct = False
-
-    conn.close()
-
-    return is_password_correct

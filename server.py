@@ -1,5 +1,5 @@
 import socket, json, threading
-from proto import database_requests
+from proto import autorisation_methods
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.bind(('192.168.2.5', 5050))
@@ -14,18 +14,13 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     message = connection.recv(4096).decode(encoding="utf-8")
     json_message = json.loads(message)
 
-    req_type = json_message["req_type"]
+    method = json_message["method"]
 
-    operation_result = {
-        "status": "processing",
-        "values": [],
-        "error": "",
-    }
 
-    match req_type:
+    match method:
 
-        case "database":
-            operation_result = database_requests.database_req_parse(request=json_message)
+        case "autorisation":
+            operation_result = autorisation_methods.autorisation_methods_parse(request=json_message)
 
     operation_result_json = json.dumps(operation_result)
     operation_result_bytes = operation_result_json.encode(encoding="utf-8")
