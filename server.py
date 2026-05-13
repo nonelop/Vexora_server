@@ -11,13 +11,10 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     print(address)
 
 
-    raw_message = connection.recv(4096)
-    message = raw_message.decode(encoding="utf-8")
+    message = connection.recv(4096).decode(encoding="utf-8")
     json_message = json.loads(message)
 
     req_type = json_message["req_type"]
-    operation = json_message["operation"]
-    values = json_message.get("values", 0)
 
     operation_result = {
         "status": "processing",

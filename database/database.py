@@ -12,7 +12,7 @@ def write_new_user(values: tuple):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)""", values
+        """INSERT OR IGNORE INTO users (username,) VALUES (?,)""", values
     )
     conn.commit()
     conn.close()

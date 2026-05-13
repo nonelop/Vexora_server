@@ -10,7 +10,7 @@ def database_req_parse(request: dict):
     match request["operation"]:
         case "write":
             write_new_user(
-                values=(request_values["username"], request_values["password"])
+                values=(request_values["username"],)
             )
             result["status"] = "successful"
         case "check_username":
