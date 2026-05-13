@@ -1,5 +1,5 @@
 import socket, json, threading
-from requests_parse import database_requests
+from proto import database_requests
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.bind(('192.168.2.5', 5050))
@@ -22,8 +22,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     operation_result = {
         "status": "processing",
         "values": [],
-        "error": False,
-        "error_str": ""
+        "error": "",
     }
 
     match req_type:

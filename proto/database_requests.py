@@ -1,4 +1,4 @@
-from database.database import write_new_user, check_username
+from database.database import write_new_user, check_username, check_password
 
 
 def database_req_parse(request: dict):
