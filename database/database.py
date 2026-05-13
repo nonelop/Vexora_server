@@ -1,7 +1,7 @@
 import sqlite3
 
 def connect_database():
-    connection = sqlite3.connect("database/users.db")
+    connection = sqlite3.connect("database/database.db")
     cursor = connection.cursor()
 
     return connection, cursor
@@ -15,7 +15,7 @@ def write_new_user(values: tuple):
     conn.close()
 
 
-def check_user(username):
+def check_username(username):
     conn, cursor = connect_database()
 
     cursor.execute("""SELECT username FROM users WHERE username = ?""", (username,))
