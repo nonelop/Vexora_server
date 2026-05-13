@@ -1,5 +1,5 @@
-import socket, json
-from database import database
+import socket, json, threading
+from requests_parse import database_requests
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.bind(('192.168.2.5', 5050))
@@ -29,14 +29,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     match req_type:
 
         case "database":
-            match operation:
-                case "write":
-                    database.write_new_user(values=(values["username"], values["password"]))
-                    operation_result["status"] = "successful"
-                case "check_username":
-                    result = database.check_username(username=values["username"])
-                    operation_result["status"] = "successful"
-                    operation_result["values"].append(result)
+            operation_result = database_requests.database_req_parse(request=json_message)
 
     operation_result_json = json.dumps(operation_result)
     operation_result_bytes = operation_result_json.encode(encoding="utf-8")

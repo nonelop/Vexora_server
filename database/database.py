@@ -1,5 +1,6 @@
 import sqlite3
 
+
 def connect_database():
     connection = sqlite3.connect("database/database.db")
     cursor = connection.cursor()
@@ -10,7 +11,9 @@ def connect_database():
 def write_new_user(values: tuple):
     conn, cursor = connect_database()
 
-    cursor.execute("""INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)""", values)
+    cursor.execute(
+        """INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)""", values
+    )
     conn.commit()
     conn.close()
 
