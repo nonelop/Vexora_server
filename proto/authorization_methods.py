@@ -1,7 +1,7 @@
 from database.database import write_new_user, check_username
 
 
-def autorisation_methods_parse(request: dict):
+def authorization_methods_parse(request: dict):
 
     data = request["data"]
 
