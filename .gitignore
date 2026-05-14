@@ -18,3 +18,5 @@ build/
 # IDEs
 .vscode/
 .idea/
+
+*.db
