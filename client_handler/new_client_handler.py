@@ -1,5 +1,5 @@
 import socket, threading, json
-from proto import authorization_methods
+from proto import authorization_method
 
 def new_connection_handler(sock: socket.socket):
 
@@ -32,7 +32,7 @@ def client_handler(connection: socket.socket):
 
             match method:
                 case "authorization":
-                    result = authorization_methods.authorization_methods_parse(json_request)
+                    result = authorization_method.authorization_method_parse(json_request)
 
             result_str = json.dumps(result)
             result_bytes = result_str.encode(encoding="utf-8")
