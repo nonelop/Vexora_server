@@ -1,4 +1,5 @@
-from database.database import write_new_user, check_username
+from database import database
+import hashlib, secrets
 
 
 def authorization_method_parse(request: dict):
@@ -16,15 +17,20 @@ def authorization_method_parse(request: dict):
 
 def register_new_user(data: dict):
 
-    write_new_user(data=(data["username"]))
+    database.write_new_user(data=(data["username"]))
     result = {"status": "OK", "data": [], "error": ""}
 
     return result
 
 
+def token_exchange(user_id: int):
+
+    has_token = database.check_has_token(user_id)
+
+
 def check_user_username(username: str):
 
-    is_exist = check_username(username)
+    is_exist = database.check_username(username)
     result = {"status": "OK", "data": [is_exist], "error": ""}
 
     return result
