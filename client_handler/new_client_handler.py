@@ -13,7 +13,8 @@ def new_connection_handler(sock: socket.socket):
         print("Новое подключение.")
 
         new_client_thread = threading.Thread(
-            target=client_handler(connection)
+            target=client_handler,
+            args=(connection,)
         )
 
         new_client_thread.start()
