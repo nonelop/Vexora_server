@@ -3,7 +3,7 @@ def message_method_parse(request: dict):
     data = request["data"]
 
     match request["operation"]:
-        case "send_message":
+        case "message.send":
             result = send_message(data["from_user_id"], data["to_user_id"], data["message"])
 
 

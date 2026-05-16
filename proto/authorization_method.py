@@ -7,13 +7,13 @@ def authorization_method_parse(request: dict):
     data = request["data"]
 
     match request["operation"]:
-        case "register_new_user":
+        case "user.register":
             result = register_new_user(data=data)
             return result
-        case "check_user_username":
+        case "check.username":
             result = check_user_username(username=data["username"])
             return result
-        case "generate_token":
+        case "token.generate":
             result = generate_token(user_id=data["user_id"])
             return result
 

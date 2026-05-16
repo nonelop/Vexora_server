@@ -1,5 +1,5 @@
 import socket, json, threading, config
-from client_handler import new_client_handler
+from connection import connection_handler
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.bind((config.SERVER_IP, config.SERVER_PORT))
@@ -7,7 +7,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     connections = {}
 
     connections_thread = threading.Thread(
-        target=new_client_handler.new_connection_handler,
+        target=connection_handler.new_connection_handler,
         args=(sock,)
     )
 
