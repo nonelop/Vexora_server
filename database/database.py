@@ -39,7 +39,7 @@ def write_new_token(data: tuple):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT INTO tokens (token_hash, user_id) VALUES (?, ?)""", data
+        """INSERT INTO tokens (user_id, token_hash) VALUES (?, ?)""", data
     )
     conn.commit()
     conn.close()
