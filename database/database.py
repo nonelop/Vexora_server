@@ -62,3 +62,13 @@ def check_has_token(user_id: int):
 
     return has_token
 
+
+def write_new_message(chat_id: int, content_type: str, text):
+
+    conn, cursor = connect_database()
+
+    cursor.execute("""INSERT INTO messages (chat_id, content_type, text)""", (chat_id, content_type, text))
+
+    conn.commit()
+    conn.close()
+
