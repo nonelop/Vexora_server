@@ -8,11 +8,11 @@ def connect_database():
     return connection, cursor
 
 
-def write_new_user(data: tuple):
+def write_new_user(username: str, reg_time: str):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT OR IGNORE INTO users (username,) VALUES (?,)""", data
+        """INSERT OR IGNORE INTO users (username, reg_time) VALUES (?, ?)""", (username, reg_time)
     )
     conn.commit()
     conn.close()

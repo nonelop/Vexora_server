@@ -1,5 +1,6 @@
 from database import database
 import hashlib, secrets
+from datetime import datetime
 
 
 def authorization_method_parse(request: dict):
@@ -8,25 +9,26 @@ def authorization_method_parse(request: dict):
 
     match request["operation"]:
         case "user.register":
-            result = register_new_user(data=data)
+            result = user_register(data=data)
             return result
         case "check.username":
-            result = check_user_username(username=data["username"])
+            result = check_username(username=data["username"])
             return result
         case "token.generate":
-            result = generate_token(user_id=data["user_id"])
+            result = token_generate(user_id=data["user_id"])
             return result
 
 
-def register_new_user(data: dict):
+def user_register(data: dict):
 
-    database.write_new_user(data=(data["username"]))
+    date = datetime.now()
+    database.write_new_user(username=data["username"], reg_time=date.strftime('%d_%m_%Y-%H:%M:%S'))
     result = {"status": "200 OK", "data": []}
 
     return result
 
 
-def generate_token(user_id: int):
+def token_generate(user_id: int):
 
     token = secrets.token_hex(32)
     raw_token_hash = hashlib.sha256(token.encode())
@@ -39,7 +41,7 @@ def generate_token(user_id: int):
     return result
 
 
-def check_user_username(username: str):
+def check_username(username: str):
 
     is_exist = database.check_username(username)
     result = {"status": "200 OK", "data": [is_exist]}
