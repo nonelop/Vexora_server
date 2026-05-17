@@ -67,7 +67,7 @@ def write_new_message(chat_id: int, content_type: str, text):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT INTO messages (chat_id, content_type, text)""",
+        """INSERT INTO messages (chat_id, content_type, text) VALUES (?, ?, ?)""",
         (chat_id, content_type, text),
     )
 
