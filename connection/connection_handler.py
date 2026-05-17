@@ -1,10 +1,10 @@
 import socket, threading, json
 from proto import authorization_method
 
+
 def new_connection_handler(sock: socket.socket):
 
     while True:
-
         print("Ожидание подключения.")
 
         sock.listen(100)
@@ -12,10 +12,7 @@ def new_connection_handler(sock: socket.socket):
 
         print("Новое подключение.")
 
-        new_client_thread = threading.Thread(
-            target=client_handler,
-            args=(connection,)
-        )
+        new_client_thread = threading.Thread(target=client_handler, args=(connection,))
 
         new_client_thread.start()
 
@@ -23,9 +20,7 @@ def new_connection_handler(sock: socket.socket):
 def client_handler(connection: socket.socket):
 
     while True:
-
         try:
-
             request = connection.recv(4096).decode(encoding="utf-8")
             json_request = json.loads(request)
 
@@ -33,7 +28,9 @@ def client_handler(connection: socket.socket):
 
             match method:
                 case "authorization":
-                    result = authorization_method.authorization_method_parse(json_request)
+                    result = authorization_method.authorization_method_parse(
+                        json_request
+                    )
 
             result_str = json.dumps(result)
             result_bytes = result_str.encode(encoding="utf-8")

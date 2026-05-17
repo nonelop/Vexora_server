@@ -12,7 +12,8 @@ def write_new_user(username: str, reg_time: str):
     conn, cursor = connect_database()
 
     cursor.execute(
-        """INSERT OR IGNORE INTO users (username, reg_time) VALUES (?, ?)""", (username, reg_time)
+        """INSERT OR IGNORE INTO users (username, reg_time) VALUES (?, ?)""",
+        (username, reg_time),
     )
     conn.commit()
     conn.close()
@@ -38,9 +39,7 @@ def check_username(username: str):
 def write_new_token(data: tuple):
     conn, cursor = connect_database()
 
-    cursor.execute(
-        """INSERT INTO tokens (user_id, token_hash) VALUES (?, ?)""", data
-    )
+    cursor.execute("""INSERT INTO tokens (user_id, token_hash) VALUES (?, ?)""", data)
     conn.commit()
     conn.close()
 
@@ -67,8 +66,10 @@ def write_new_message(chat_id: int, content_type: str, text):
 
     conn, cursor = connect_database()
 
-    cursor.execute("""INSERT INTO messages (chat_id, content_type, text)""", (chat_id, content_type, text))
+    cursor.execute(
+        """INSERT INTO messages (chat_id, content_type, text)""",
+        (chat_id, content_type, text),
+    )
 
     conn.commit()
     conn.close()
-

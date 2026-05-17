@@ -22,7 +22,9 @@ def authorization_method_parse(request: dict):
 def user_register(data: dict):
 
     date = datetime.now()
-    database.write_new_user(username=data["username"], reg_time=date.strftime('%d_%m_%Y-%H:%M:%S'))
+    database.write_new_user(
+        username=data["username"], reg_time=date.strftime("%d_%m_%Y-%H:%M:%S")
+    )
     result = {"status": "200 OK", "data": []}
 
     return result

@@ -7,8 +7,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     connections = {}
 
     connections_thread = threading.Thread(
-        target=connection_handler.new_connection_handler,
-        args=(sock,)
+        target=connection_handler.new_connection_handler, args=(sock,)
     )
 
     connections_thread.start()

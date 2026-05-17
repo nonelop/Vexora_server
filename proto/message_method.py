@@ -1,5 +1,6 @@
 from database import database
 
+
 def message_method_parse(request: dict):
 
     data = request["data"]
@@ -8,8 +9,8 @@ def message_method_parse(request: dict):
         case "message.send":
             result = send_message(
                 chat_id=data["chat_id"],
-                content_type=data["content_type"], 
-                text=data["text"]
+                content_type=data["content_type"],
+                text=data["text"],
             )
             return result
 
