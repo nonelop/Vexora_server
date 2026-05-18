@@ -35,6 +35,8 @@ def client_handler(connection: socket.socket):
                     result = message_method.message_method_parse(
                         json_request
                     )
+                case _:
+                    result = {"status": "400 Bad Request", "data": []}
 
             result_str = json.dumps(result)
             result_bytes = result_str.encode(encoding="utf-8")

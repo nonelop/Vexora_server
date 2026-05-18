@@ -7,9 +7,8 @@ def message_method_parse(request: dict):
 
     match request["operation"]:
         case "message.send":
-            print(data["text"])
-
             result = send_message(
+                from_user_id=data["from_user_id"],
                 chat_id=data["chat_id"],
                 content_type=data["content_type"],
                 text=data["text"],
@@ -17,13 +16,9 @@ def message_method_parse(request: dict):
             return result
 
 
-def send_message(chat_id: int, content_type: str, text):
+def send_message(from_user_id: int, chat_id: int, content_type: str, text):
 
-    print(text)
-
-    database.write_new_message(chat_id, content_type, text)
-
-    print(text)
+    database.write_new_message(from_user_id, chat_id, content_type, text)
 
     result = {"status": "200 OK", "data": []}
 
