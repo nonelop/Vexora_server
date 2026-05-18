@@ -62,7 +62,7 @@ def check_has_token(user_id: int):
     return has_token
 
 
-def write_new_message(chat_id: int, from_user_id: int, content_type: str, text):
+def write_new_message(from_user_id: int, chat_id: int, content_type: str, text):
 
     conn, cursor = connect_database()
 
