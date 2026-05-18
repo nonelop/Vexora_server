@@ -44,22 +44,20 @@ def write_new_token(data: tuple):
     conn.close()
 
 
-def check_has_token(user_id: int):
+def check_tokens(user_id: int):
 
     conn, cursor = connect_database()
 
-    cursor.execute("""SELECT user_id FROM tokens WHERE user_id = ?""", (user_id,))
+    cursor.execute("""SELECT token_hash FROM tokens WHERE user_id = ?""", (user_id,))
 
-    result = cursor.fetchone()
-
-    if result:
-        has_token = True
-    else:
-        has_token = False
+    result = cursor.fetchall()
 
     conn.close()
 
-    return has_token
+    if result:
+        return result
+    else:
+        return False
 
 
 def write_new_message(from_user_id: int, chat_id: int, content_type: str, text):

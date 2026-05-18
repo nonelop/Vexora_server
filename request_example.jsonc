@@ -1,0 +1,16 @@
+// that just for me
+
+{
+    "method": "message",
+    "operation": "message.send",
+    "data": {
+        "from_user_id": 13,
+        "chat_id": 32,
+        "content_type": "text",
+        "text": "Hi"
+    },
+    "auth": {
+        "user_id": 13,
+        "token": "abc123def456"
+    }
+}
