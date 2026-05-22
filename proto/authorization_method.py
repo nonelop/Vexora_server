@@ -22,13 +22,18 @@ def authorization_method_parse(request: dict):
 def user_register(data: dict):
 
     date = datetime.now()
-    database.write_new_user(
-        username=data["username"], reg_time=date.strftime("%d_%m_%Y-%H:%M:%S")
-    )
-    result = {"status": "200 OK", "data": []}
 
-    return result
+    is_exist = check_username(username=data["username"])["data"][0]
 
+    if is_exist:
+        return {"status": "409 Conflict", "data": []}
+    
+    else:
+        database.write_new_user(
+            username=data["username"], reg_time=date.strftime("%d_%m_%Y-%H:%M:%S")
+        )
+        return {"status": "200 OK", "data": []}
+ 
 
 def token_generate(user_id: int):
 
